@@ -1,0 +1,31 @@
+Modulo Tracker
+switching on 2
+done 3
+init modem 4
+AT->ok
+done 5
+checking net 8
+AT+CREG?->buf: 
+AT+CREG?
++CREG: 0,2
+
+OK
+
+done 9
+checking net 8
+AT+CREG?->buf: 
+¨VIÿÑG?
++CREG: 0,1
+
+OK
+
+done 9
+---------------------
+ready  10
+sending SMS ...
+AT+CMGF=1->ok
+AT+CMGS="+584140265927"->not ok: 
+AT+CGÒ¥&&MLÍ0265927"
+> 
+ı[H[Y][ºÿVÖ¬,äamawevo
+done
