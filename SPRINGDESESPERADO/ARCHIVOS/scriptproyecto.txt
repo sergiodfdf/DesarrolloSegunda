@@ -1,0 +1,337 @@
+--############################
+--## KeySpace Proyecto #######
+--############################
+
+use Proyecto;
+
+
+
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&                             &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&       COLUMN FAMILIES       &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&                             &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+-----------------------------------------------------------------------
+------------------- COLUMNFAMILY Comentario ---------------------------
+-----------------------------------------------------------------------
+
+create column family Comentario with comparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type and column_metadata = 
+[
+{column_name: id, validation_class: UTF8Type},
+{column_name: contenido, validation_class: UTF8Type},
+{column_name: fecha_creacion, validation_class: UTF8Type},
+{column_name: adjunto, validation_class: UTF8Type},
+{column_name: nickname, validation_class: UTF8Type},
+{column_name: reply, validation_class: UTF8Type}
+];
+
+
+
+
+-----------------------------------------------------------------------
+-------------------- COLUMNFAMILY Usuario -----------------------------
+-----------------------------------------------------------------------
+
+create column family Usuario with comparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type and column_metadata = 
+[
+{column_name: nombre, validation_class: UTF8Type},
+{column_name: apellido, validation_class: UTF8Type},
+{column_name: clave, validation_class: UTF8Type},
+{column_name: correo, validation_class: UTF8Type},
+{column_name: nickname, validation_class: UTF8Type},
+{column_name: fecha_nac, validation_class: UTF8Type},
+{column_name: pais, validation_class: UTF8Type},
+{column_name: biografia, validation_class: UTF8Type},
+{column_name: foto, validation_class: UTF8Type}
+];
+
+
+
+
+
+
+-----------------------------------------------------------------------
+--------------------- COLUMNFAMILY Etiqueta --------------------------- 
+-----------------------------------------------------------------------
+
+create column family Etiqueta with comparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type and column_metadata = 
+[
+{column_name: nombre, validation_class: UTF8Type}
+];
+
+
+
+
+-----------------------------------------------------------------------
+-------------------- COLUMNFAMILY Token -------------------------------
+-----------------------------------------------------------------------
+
+create column family Token with comparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type and column_metadata = 
+[
+{column_name: usuario, validation_class: UTF8Type},
+{column_name: token, validation_class: UTF8Type},
+{column_name: fecha_creacion, validation_class: UTF8Type},
+{column_name: ip, validation_class: UTF8Type},
+];
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-------------- CONSULTA: COMENTARIOS DE UN USUARIO -------------------- 
+-----------------------------------------------------------------------
+
+create column family Usuario_Comentario
+with column_type = Super
+and comparator = UTF8Type
+and subcomparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type;
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-------------- CONSULTA: REPLY DE COMENTARIOS ------------------------- 
+-----------------------------------------------------------------------
+
+create column family Reply_Comentario
+with column_type = Super
+and comparator = UTF8Type
+and subcomparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type;
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-------------- CONSULTA: PUNTUACIONES DE UN COMENTARIO ----------------
+-----------------------------------------------------------------------
+
+create column family Puntuacion_Comentario
+with column_type = Super
+and comparator = UTF8Type
+and subcomparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type;
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-------------- CONSULTA: COMENTARIOS POR ETIQUETA --------------------- 
+-----------------------------------------------------------------------
+
+create column family Etiqueta_Comentario
+with column_type = Super
+and comparator = UTF8Type
+and subcomparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type;
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-------------- CONSULTA: ETIQUETAS DE UN COMENTARIO ------------------- 
+-----------------------------------------------------------------------
+
+create column family Comentario_Etiqueta 
+with column_type = Super
+and comparator = UTF8Type
+and subcomparator = UTF8Type and key_validation_class = UTF8Type and default_validation_class = UTF8Type;
+
+
+
+
+
+
+
+
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&                       &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&          SETS         &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&                       &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
+
+--@@@@@@@@@@SETS - COMENTARIO@@@@@@@@@
+set Comentario['1']['id'] = '1';
+set Comentario['1']['contenido'] = 'Goodnight everyone on TWITTAAAA x';
+set Comentario['1']['fecha_creacion'] = '6/5/2012,13:23';
+set Comentario['1']['adjunto'] = 'archivo adjunto';
+set Comentario['1']['nickname'] = 'sd';
+set Comentario['1']['reply'] = '0';
+set Comentario['2']['id'] = '2';
+set Comentario['2']['contenido'] = '#YouWereCuteUntil i enlarged your profile picture';
+set Comentario['2']['fecha_creacion'] = '7/5/2012,3:12';
+set Comentario['2']['adjunto'] = 'archivo adjunto';
+set Comentario['2']['nickname'] = 'ds';
+set Comentario['2']['reply'] = '1';
+set Comentario['3']['id'] = '3';
+set Comentario['3']['contenido'] = 'Why did the doughnut shop close? The owner got tired of the hole thing';
+set Comentario['3']['fecha_creacion'] = '8/5/2012,19:34';
+set Comentario['3']['adjunto'] = 'archivo adjunto';
+set Comentario['3']['nickname'] = 'sd';
+set Comentario['3']['reply'] = '0';
+set Comentario['4']['id'] = '4';
+set Comentario['4']['contenido'] = 'Estoy Estudiando';
+set Comentario['4']['fecha_creacion'] = '6/5/2012,16:12';
+set Comentario['4']['adjunto'] = 'archivo adjunto';
+set Comentario['4']['nickname'] = 'ad';
+set Comentario['4']['reply'] = '0';
+set Comentario['5']['id'] = '5';
+set Comentario['5']['contenido'] = 'Check your Internet connection. Restart any router, modem, or other network devices you may be using.';
+set Comentario['5']['fecha_creacion'] = '8/5/2012,14:42';
+set Comentario['5']['adjunto'] = 'archivo adjunto';
+set Comentario['5']['nickname'] = 'ad';
+set Comentario['5']['reply'] = '1';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@@SETS - USUARIO@@@@@@@@@@
+set Usuario['sd']['nombre'] = 'Sergio';
+set Usuario['sd']['apellido'] = 'De Freitas';
+set Usuario['sd']['clave'] = '1234';
+set Usuario['sd']['correo'] = 'desarrollo.mail.spring@gmail.com';
+set Usuario['sd']['nickname'] = 'sd';
+set Usuario['sd']['fecha_nac'] = 'es joven';
+set Usuario['sd']['pais'] = 'No Es Venezuela';
+set Usuario['sd']['biografia'] = 'Muchos logros... No caben aqui';
+set Usuario['sd']['foto'] = 'GoodLooking';
+set Usuario['ds']['nombre'] = 'Daniel';
+set Usuario['ds']['apellido'] = 'Sarmiento';
+set Usuario['ds']['clave'] = 'asdf';
+set Usuario['ds']['correo'] = 'desarrollo.mail.spring@gmail.com';
+set Usuario['ds']['nickname'] = 'ds';
+set Usuario['ds']['fecha_nac'] = 'es joven';
+set Usuario['ds']['pais'] = 'No Es Venezuela';
+set Usuario['ds']['biografia'] = 'Consiguio pagina para ver canales internacionales, que luego fue cancelada';
+set Usuario['ds']['foto'] = 'No Tengo Me Robaron la Camara';
+set Usuario['ad']['nombre'] = 'Antonio';
+set Usuario['ad']['apellido'] = 'De Freitas';
+set Usuario['ad']['clave'] = 'aaaa';
+set Usuario['ad']['correo'] = 'desarrollo.mail.spring@gmail.com';
+set Usuario['ad']['nickname'] = 'ad';
+set Usuario['ad']['fecha_nac'] = 'es joven';
+set Usuario['ad']['pais'] = 'No Es Venezuela';
+set Usuario['ad']['biografia'] = 'Veo muchos partidos de futbol';
+set Usuario['ad']['foto'] = 'No tengo tiempo para fotos... estoy viendo un partido';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@SETS - ETIQUETA@@@@@@@@@@
+set Etiqueta['Musica']['nombre'] = 'Musica';
+set Etiqueta['Saludo']['nombre'] = 'Saludo';
+set Etiqueta['Informativo']['nombre'] = 'Informativo';
+set Etiqueta['Deporte']['nombre'] = 'Deporte';
+set Etiqueta['Estudio']['nombre'] = 'Estudio';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+--@@@@@@@@@@@@@@@@@@SET CONSULTA: USUARIO_COMENTARIO@@@@@@@@@@@@@@@@@@@@@@@
+set Usuario_Comentario['sd']['1']['contenido'] = 'Goodnight everyone on TWITTAAAA x';
+set Usuario_Comentario['sd']['1']['fecha_creacion'] = '6/5/2012,13:23';
+set Usuario_Comentario['sd']['1']['adjunto'] = 'archivo adjunto';
+set Usuario_Comentario['ds']['2']['contenido'] = '#YouWereCuteUntil i enlarged your profile picture';
+set Usuario_Comentario['ds']['2']['fecha_creacion'] = '7/5/2012,3:12';
+set Usuario_Comentario['ds']['2']['adjunto'] = 'archivo adjunto';
+set Usuario_Comentario['sd']['3']['contenido'] = 'Why did the doughnut shop close? The owner got tired of the hole thing';
+set Usuario_Comentario['sd']['3']['fecha_creacion'] = '8/5/2012,19:34';
+set Usuario_Comentario['sd']['3']['adjunto'] = 'archivo adjunto';
+set Usuario_Comentario['ad']['4']['contenido'] = 'Estoy Estudiando';
+set Usuario_Comentario['ad']['4']['fecha_creacion'] = '6/5/2012,16:12';
+set Usuario_Comentario['ad']['4']['adjunto'] = 'archivo adjunto';
+set Usuario_Comentario['ad']['5']['contenido'] = 'Check your Internet connection. Restart any router, modem, or other network devices you may be using.';
+set Usuario_Comentario['ad']['5']['fecha_creacion'] = '8/5/2012,14:42';
+set Usuario_Comentario['ad']['5']['adjunto'] = 'archivo adjunto';
+--set Usuario_Comentario['(ID Usuario)']['(ID Comentario)']['(Columna)'] = '(Contenido Del Comentario)';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@@@@@@@@SET CONSULTA: REPLY_COMENTARIO@@@@@@@@@@@@@@@@@@@@@@@@@
+set Reply_Comentario['1']['2']['contenido'] = '#YouWereCuteUntil i enlarged your profile picture';
+set Reply_Comentario['1']['2']['fecha_creacion'] = '7/5/2012,3:12';
+set Reply_Comentario['1']['2']['adjunto'] = 'archivo adjunto';
+set Reply_Comentario['1']['5']['contenido'] = 'Check your Internet connection. Restart any router, modem, or other network devices you may be using.';
+set Reply_Comentario['1']['5']['fecha_creacion'] = '8/5/2012,14:42';
+set Reply_Comentario['1']['5']['adjunto'] = 'archivo adjunto';
+--set Reply_Comentario['(ID Comentario)']['(ID Comentario Reply)']['(Columna)'] = '(Contenido Del Comentario)';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@@@@@@@@SET CONSULTA: PUNTUACION_COMENTARIO@@@@@@@@@@@@@@@@@@@@
+set Puntuacion_Comentario['1']['sd']['punto'] = '1';
+set Puntuacion_Comentario['1']['ds']['punto'] = '1';
+set Puntuacion_Comentario['1']['ad']['punto'] = '0';
+set Puntuacion_Comentario['2']['ad']['punto'] = '1';
+set Puntuacion_Comentario['3']['ad']['punto'] = '0';
+set Puntuacion_Comentario['3']['ds']['punto'] = '0';
+--set Puntuacion_Comentario['(ID Comentario)']['(ID Usuario)']['(Columna)'] = '(Nickname Del Usuario)';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@@@@@@@@SET CONSULTA: ETIQUETA_COMENTARIO@@@@@@@@@@@@@@@@@@@@@@
+set Etiqueta_Comentario['Saludo']['1']['contenido'] = 'Goodnight everyone on TWITTAAAA x';
+set Etiqueta_Comentario['Saludo']['1']['fecha_creacion'] = '6/5/2012,13:23';
+set Etiqueta_Comentario['Saludo']['1']['adjunto'] = 'archivo adjunto';
+set Etiqueta_Comentario['Saludo']['2']['contenido'] = '#YouWereCuteUntil i enlarged your profile picture';
+set Etiqueta_Comentario['Saludo']['2']['fecha_creacion'] = '7/5/2012,3:12';
+set Etiqueta_Comentario['Saludo']['2']['adjunto'] = 'archivo adjunto';
+set Etiqueta_Comentario['Informativo']['2']['contenido'] = '#YouWereCuteUntil i enlarged your profile picture';
+set Etiqueta_Comentario['Informativo']['2']['fecha_creacion'] = '7/5/2012,3:12';
+set Etiqueta_Comentario['Informativo']['2']['adjunto'] = 'archivo adjunto';
+set Etiqueta_Comentario['Saludo']['3']['contenido'] = 'Why did the doughnut shop close? The owner got tired of the hole thing';
+set Etiqueta_Comentario['Saludo']['3']['fecha_creacion'] = '8/5/2012,19:34';
+set Etiqueta_Comentario['Saludo']['3']['adjunto'] = 'archivo adjunto';
+set Etiqueta_Comentario['Estudio']['4']['contenido'] = 'Estoy Estudiando';
+set Etiqueta_Comentario['Estudio']['4']['fecha_creacion'] = '6/5/2012,16:12';
+set Etiqueta_Comentario['Estudio']['4']['adjunto'] = 'archivo adjunto';
+--set Etiqueta_Comentario['(ID Etiqueta)']['(ID Comentario)']['(Columna)'] = '(Contenido Del Comentario)';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+--@@@@@@@@@@@@@@@@@@SET CONSULTA: COMENTARIO_ETIQUETA@@@@@@@@@@@@@@@@@@@@@@
+set Comentario_Etiqueta['1']['Saludo']['nombre'] = 'Saludo';
+set Comentario_Etiqueta['2']['Saludo']['nombre'] = 'Saludo';
+set Comentario_Etiqueta['2']['Informativo']['nombre'] = 'Informativo';
+set Comentario_Etiqueta['3']['Saludo']['nombre'] = 'Saludo';
+set Comentario_Etiqueta['4']['Estudio']['nombre'] = 'Estudio';
+--set Comentario_Etiqueta['(ID Comentario)']['(ID Etiqueta)'] = '(Nombre De La Etiqueta)';
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
